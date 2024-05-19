@@ -1,5 +1,5 @@
 import express from 'express';
-import { userRouter } from './users/users.js';
+import { userRouter } from './users/users';
 
 const host = '127.0.0.1'
 const port = 8000
@@ -16,7 +16,7 @@ app.get('/hello', (req, res) => {
 app.use('/users', userRouter);
 
 app.use((err, res) => {
-    res.status(500).send(err.message)
+    res.status(500).send(err)
 })
 app.listen(port, () => {
     console.log(`Start server at ${host}:${port}`)
