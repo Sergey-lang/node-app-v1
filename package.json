@@ -2,16 +2,18 @@
   "name": "node-app-v1",
   "version": "1.0.0",
   "description": "for testing nodejs",
-  "main": "index.ts",
-  "type": "module",
+  "main": "src/index.ts",
+  "type": "commonjs",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node ./dist/main.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sergey Kuharyonok",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "tslog": "^4.9.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.21"
