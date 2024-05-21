@@ -23,7 +23,7 @@ export abstract class BaseController {
     }
 
     public ok<T>(res: Response, message: T) {
-        this.send<T>(res, 200, message)
+        return this.send<T>(res, 200, message)
     }
 
     protected bindRoutes(router: IControllerRoute[]) {
