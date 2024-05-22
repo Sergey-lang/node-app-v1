@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { BaseController } from '../common/base.controller';
 import { LoggerService } from '../logger/logger.service';
+import { HTTPError } from '../errors/http.error.class';
 
 export class UsersController extends BaseController {
     constructor(logger: LoggerService) {
-        super(logger);
+        super(logger); // call to get all parent features
         this.bindRoutes([
             {path: '/register', method: 'post', func: this.register},
             {path: '/login', method: 'post', func: this.login},
@@ -12,7 +13,8 @@ export class UsersController extends BaseController {
     }
 
     login(req: Request, res: Response, next: NextFunction) {
-        this.ok(res, 'login')
+        // this.ok(res, 'login')
+        next(new HTTPError(401, 'Test Error', 'login'))
     }
 
     register(req: Request, res: Response, next: NextFunction) {
