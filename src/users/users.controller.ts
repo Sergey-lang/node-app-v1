@@ -1,11 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import { BaseController } from '../common/base.controller';
-import { LoggerService } from '../logger/logger.service';
 import { HTTPError } from '../errors/http.error.class';
+import { inject, injectable } from 'inversify';
+import { Types } from '../types';
+import { ILogger } from '../logger/logger.interface';
+import 'reflect-metadata';
 
+@injectable()
 export class UsersController extends BaseController {
-    constructor(logger: LoggerService) {
-        super(logger); // call to get all parent features
+    constructor(@inject(Types.ILogger) private loggerService: ILogger) {
+        super(loggerService); // call to get all parent features
         this.bindRoutes([
             {path: '/register', method: 'post', func: this.register},
             {path: '/login', method: 'post', func: this.login},
