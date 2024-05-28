@@ -7,19 +7,24 @@ import { Types } from './types';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { ExceptionFilter } from './errors/exception.filter';
 
-export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
-    bind<ILogger>(Types.ILogger).to(LoggerService);
-    bind<IExceptionFilter>(Types.ExceptionFilter).to(ExceptionFilter);
-    bind<UsersController>(Types.UserController).to(UsersController);
-    bind<App>(Types.Application).to(App);
-})
-
-function bootstrap() {
-    const appContainer = new Container();
-    appContainer.load(appBindings);
-    const app = appContainer.get<App>(Types.Application);
-    app.init();
-    return { appContainer, app };
+export interface IBootstrapReturn {
+	appContainer: Container;
+	app: App;
 }
 
-export const { app, appContainer } =  bootstrap();
+export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
+	bind<ILogger>(Types.ILogger).to(LoggerService);
+	bind<IExceptionFilter>(Types.ExceptionFilter).to(ExceptionFilter);
+	bind<UsersController>(Types.UserController).to(UsersController);
+	bind<App>(Types.Application).to(App);
+});
+
+function bootstrap(): IBootstrapReturn {
+	const appContainer = new Container();
+	appContainer.load(appBindings);
+	const app = appContainer.get<App>(Types.Application);
+	app.init();
+	return { appContainer, app };
+}
+
+export const { app, appContainer } = bootstrap();

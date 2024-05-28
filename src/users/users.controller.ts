@@ -9,20 +9,19 @@ import { IUsersController } from './users.controller.interface';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
-    constructor(@inject(Types.ILogger) private loggerService: ILogger) {
-        super(loggerService); // call to get all parent features
-        this.bindRoutes([
-            {path: '/register', method: 'post', func: this.register},
-            {path: '/login', method: 'post', func: this.login},
-        ])
-    }
+	constructor(@inject(Types.ILogger) private loggerService: ILogger) {
+		super(loggerService); // call to get all parent features
+		this.bindRoutes([
+			{ path: '/register', method: 'post', func: this.register },
+			{ path: '/login', method: 'post', func: this.login },
+		]);
+	}
 
-    login(req: Request, res: Response, next: NextFunction) {
-        // this.ok(res, 'login')
-        next(new HTTPError(401, 'Test Error', 'login'))
-    }
+	login(req: Request, res: Response, next: NextFunction): void {
+		next(new HTTPError(401, 'Test Error', 'login'));
+	}
 
-    register(req: Request, res: Response, next: NextFunction) {
-        this.ok(res, 'register')
-    }
+	register(req: Request, res: Response, next: NextFunction): void {
+		this.ok(res, 'register');
+	}
 }
