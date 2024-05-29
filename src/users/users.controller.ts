@@ -18,6 +18,7 @@ export class UsersController extends BaseController implements IUsersController 
 	}
 
 	login(req: Request, res: Response, next: NextFunction): void {
+		console.log('ds');
 		next(new HTTPError(401, 'Test Error', 'login'));
 	}
 

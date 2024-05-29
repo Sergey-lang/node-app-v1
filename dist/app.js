@@ -63,3 +63,4 @@ exports.App = App = __decorate([
     __metadata("design:paramtypes", [Object, users_controller_1.UsersController,
         exception_filter_1.ExceptionFilter])
 ], App);
+//# sourceMappingURL=app.js.map

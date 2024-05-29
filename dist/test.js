@@ -70,3 +70,4 @@ __decorate([
 exports.User = User = __decorate([
     Component(1)
 ], User);
+//# sourceMappingURL=test.js.map

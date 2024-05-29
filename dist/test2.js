@@ -21,3 +21,4 @@ exports.C = C;
 exports.C = C = __decorate([
     Inject('c')
 ], C);
+//# sourceMappingURL=test2.js.map

@@ -28,6 +28,7 @@ let UsersController = class UsersController extends base_controller_1.BaseContro
         ]);
     }
     login(req, res, next) {
+        console.log('ds');
         next(new http_error_class_1.HTTPError(401, 'Test Error', 'login'));
     }
     register(req, res, next) {
@@ -40,3 +41,4 @@ exports.UsersController = UsersController = __decorate([
     __param(0, (0, inversify_1.inject)(types_1.Types.ILogger)),
     __metadata("design:paramtypes", [Object])
 ], UsersController);
+//# sourceMappingURL=users.controller.js.map
