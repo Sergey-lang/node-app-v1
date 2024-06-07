@@ -6,6 +6,7 @@ import { ILogger } from './logger/logger.interface';
 import { inject, injectable } from 'inversify';
 import { Types } from './types';
 import 'reflect-metadata';
+import { json } from 'body-parser';
 
 @injectable()
 export class App {
@@ -20,6 +21,10 @@ export class App {
 	) {
 		this.app = express();
 		this.port = 8000;
+	}
+
+	useMiddleware(): void {
+		this.app.use(json());
 	}
 
 	useRoutes(): void {
