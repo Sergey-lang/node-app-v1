@@ -36,6 +36,7 @@ export class App {
 	}
 
 	public async init(): Promise<void> {
+		this.useMiddleware();
 		this.useRoutes();
 		this.useExceptionFilters();
 		this.server = this.app.listen(this.port);

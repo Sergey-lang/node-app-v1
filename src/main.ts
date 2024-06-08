@@ -16,19 +16,19 @@ export interface IBootstrapReturn {
 }
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
-	bind<ILogger>(Types.ILogger).to(LoggerService);
+	bind<ILogger>(Types.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExceptionFilter>(Types.ExceptionFilter).to(ExceptionFilter);
 	bind<IUsersController>(Types.UserController).to(UsersController);
 	bind<IUsersService>(Types.UserService).to(UsersService);
 	bind<App>(Types.Application).to(App);
 });
 
-function bootstrap(): IBootstrapReturn {
+async function bootstrap(): Promise<IBootstrapReturn> {
 	const appContainer = new Container();
 	appContainer.load(appBindings);
 	const app = appContainer.get<App>(Types.Application);
-	app.init();
+	await app.init();
 	return { appContainer, app };
 }
 
-export const { app, appContainer } = bootstrap();
+export const boot = bootstrap();
