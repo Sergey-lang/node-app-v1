@@ -9,10 +9,14 @@ import { IUsersController } from './users.controller.interface';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { User } from './user.entity';
+import { IUsersService } from './user.service.interface';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
-	constructor(@inject(Types.ILogger) private loggerService: ILogger) {
+	constructor(
+		@inject(Types.ILogger) private loggerService: ILogger,
+		@inject(Types.UserService) private userService: IUsersService,
+	) {
 		super(loggerService); // call to get all parent features
 		this.bindRoutes([
 			{ path: '/register', method: 'post', func: this.register },
@@ -25,8 +29,10 @@ export class UsersController extends BaseController implements IUsersController 
 	}
 
 	async register({ body }: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): Promise<void> {
-		this.ok(res, 'register');
-		const newUser = new User(body.email, body.name);
-		await newUser.setPassword(body.password);
+		const result = await this.userService.createUser(body);
+		if (!result) {
+			return next(new HTTPError(422, 'User already exist'));
+		}
+		this.ok(res, { email: result.email });
 	}
 }
