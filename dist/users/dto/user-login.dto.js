@@ -9,27 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoggerService = void 0;
-const tslog_1 = require("tslog");
-const inversify_1 = require("inversify");
-require("reflect-metadata");
-let LoggerService = class LoggerService {
-    constructor() {
-        this.logger = new tslog_1.Logger({});
-    }
-    log(...args) {
-        this.logger.info(...args);
-    }
-    error(...args) {
-        this.logger.error(...args);
-    }
-    warn(...args) {
-        this.logger.warn(...args);
-    }
-};
-exports.LoggerService = LoggerService;
-exports.LoggerService = LoggerService = __decorate([
-    (0, inversify_1.injectable)(),
-    __metadata("design:paramtypes", [])
-], LoggerService);
-//# sourceMappingURL=logger.service.js.map
+exports.UserLoginDto = void 0;
+const class_validator_1 = require("class-validator");
+class UserLoginDto {
+}
+exports.UserLoginDto = UserLoginDto;
+__decorate([
+    (0, class_validator_1.IsEmail)({}, { message: 'Not valid email' }),
+    __metadata("design:type", String)
+], UserLoginDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'Not set password' }),
+    __metadata("design:type", String)
+], UserLoginDto.prototype, "password", void 0);
+//# sourceMappingURL=user-login.dto.js.map
